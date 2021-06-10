@@ -40,10 +40,12 @@ document.addEventListener('DOMContentLoaded', () => {
 		checkbox = addForm.querySelector('[type="checkbox"]');
 
 
+	// обработчик события на отправку формы:
+
 	addForm.addEventListener('submit', (event) => {
 		event.preventDefault();
 
-		let newFilm = addInput.value;
+		let newFilm = addInput.value;          // получаем значение от пользователя
 		let favorite = checkbox.checked;
 
 		if (newFilm) {
@@ -69,19 +71,21 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 
-	const sortArr = (arr) => {
+	const sortArr = (arr) => {    // сортируем массив
 		arr.sort();
 	}
 
-	const deleteAdv = (arr) => {
+	const deleteAdv = (arr) => {    // удаляем рекламу
 		arr.forEach(item => {
 			item.remove();
 		});
 	}
 
 
+	// формируем динамически список просмотренных фильмов:
+
 	function creatMovieList(films, parent) {
-		parent.innerHTML = '';
+		parent.innerHTML = '';   // очищаем список на странице 
 		sortArr(films);
 
 		films.forEach((item, i) => {
@@ -92,10 +96,12 @@ document.addEventListener('DOMContentLoaded', () => {
 			`;
 		});
 
+		// удаляем фильмы из списка нажатием на козину
+
 		document.querySelectorAll('.delete').forEach((cart, i) => {
 			cart.addEventListener('click', () => {
 				cart.parentElement.remove();
-				movieDB.movies.splice(i, 1);
+				movieDB.movies.splice(i, 1);   // удалям из базы
 
 				creatMovieList(films, parent);
 			})
