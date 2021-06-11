@@ -114,3 +114,34 @@ document.addEventListener('DOMContentLoaded', () => {
 	creatMovieList(movieDB.movies, movieList);
 
 });
+
+console.log(document.querySelectorAll('.promo__menu-item'));
+
+const items = document.querySelectorAll('.promo__menu-item');
+
+console.log(items[1].classList.length);
+console.log(items[0].classList.length);
+console.log(items[0].classList.item(1));
+
+items[0].classList.add('test');
+console.log(items[0].classList.length);
+
+items[0].classList.remove('test');
+console.log(items[0].classList.length);
+
+// items[0].classList.toggle('test');
+
+
+items.forEach(item => {
+	item.addEventListener('click', (e) => {
+		e.preventDefault();
+		// console.log(event.target);
+		// if (!e.target.classList.contains('promo__menu-item_active')) {
+		// 	e.target.classList.add('promo__menu-item_active');
+
+		// } else {
+		// 	e.target.classList.remove('promo__menu-item_active');
+		// }
+		e.target.classList.toggle('promo__menu-item_active');
+	});
+});
