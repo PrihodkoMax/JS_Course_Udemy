@@ -118,6 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
 console.log(document.querySelectorAll('.promo__menu-item'));
 
 const items = document.querySelectorAll('.promo__menu-item');
+const nav = document.querySelector('nav.promo__menu-list');
 
 console.log(items[1].classList.length);
 console.log(items[0].classList.length);
@@ -145,3 +146,12 @@ items.forEach(item => {
 		e.target.classList.toggle('promo__menu-item_active');
 	});
 });
+
+// nav.addEventListener('click', (e) => {
+// 	e.preventDefault();
+// 	console.dir(e.target);
+
+// 	if (e.target && e.target.tagName == 'A') {
+// 		e.target.classList.toggle('promo__menu-item_active');
+// 	}
+// });
