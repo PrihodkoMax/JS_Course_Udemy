@@ -41,22 +41,22 @@ window.addEventListener('DOMContentLoaded', () => {
 	});
 
 	// Timer 
-	
+
 	const deadLine = '2021-06-21';
-	
+
 	function getTimeRemaining(endtime) {
 		const t = Date.parse(endtime) - Date.parse(new Date()),
-				days = Math.floor(t / (1000 * 60 * 60 * 24)),
-				hours = Math.floor(t / (1000 * 60 * 60) % 24),
-				minutes = Math.floor(t / (1000 * 60) % 60),
-				seconds = Math.floor(t / (1000) % 60);
-	
+			days = Math.floor(t / (1000 * 60 * 60 * 24)),
+			hours = Math.floor(t / (1000 * 60 * 60) % 24),
+			minutes = Math.floor(t / (1000 * 60) % 60),
+			seconds = Math.floor(t / (1000) % 60);
+
 		return {
 			'total': t,
 			'days': days,
 			'hours': hours,
 			'minutes': minutes,
-			'seconds': seconds, 
+			'seconds': seconds,
 		};
 	}
 
@@ -67,25 +67,25 @@ window.addEventListener('DOMContentLoaded', () => {
 			return num;
 		}
 	}
-	
+
 	function setClock(selector, endtime) {
 		const timer = document.querySelector(selector),
-				days = timer.querySelector('#days'),
-				hours = timer.querySelector('#hours'),
-				minutes = timer.querySelector('#minutes'),
-				seconds = timer.querySelector('#seconds'),
-				timeInterval = setInterval(updateClock, 1000);
-	
+			days = timer.querySelector('#days'),
+			hours = timer.querySelector('#hours'),
+			minutes = timer.querySelector('#minutes'),
+			seconds = timer.querySelector('#seconds'),
+			timeInterval = setInterval(updateClock, 1000);
+
 		updateClock();
 
 		function updateClock() {
 			const t = getTimeRemaining(endtime);
-					
+
 			days.innerHTML = setZero(t.days);
 			hours.innerHTML = setZero(t.hours);
 			minutes.innerHTML = setZero(t.minutes);
 			seconds.innerHTML = setZero(t.seconds);
-	
+
 			if (t.total <= 0) {
 				clearInterval(timeInterval);
 			}
@@ -93,5 +93,40 @@ window.addEventListener('DOMContentLoaded', () => {
 	}
 
 	setClock('.timer', deadLine);
-	
+
+	// Modal
+
+	const modal = document.querySelector('.modal'),
+		modalCloseBtn = document.querySelector('[data-close'),
+		modalTriggers = document.querySelectorAll('[data-modal');
+
+	modalTriggers.forEach(btn => {
+		btn.addEventListener('click', (e) => {
+			modal.classList.add('show');
+			modal.classList.remove('hide');
+			// modal.classList.toggle('show');
+			document.body.style.overflow = 'hidden';
+		})
+	});
+
+	function closeModalWindow() {
+		modal.classList.add('hide');
+		modal.classList.remove('show');
+		// modal.classList.toggle('show');
+		document.body.style.overflow = '';
+	}
+
+	modalCloseBtn.addEventListener('click', closeModalWindow);
+
+	modal.addEventListener('click', (e) => {
+		if (e.target === modal) {
+			closeModalWindow();
+		}
+	})
+
+	document.addEventListener('keydown', (e) => {
+		if (e.code === 'Escape' && modal.classList.contains('show')) {
+			closeModalWindow();
+		}
+	})
 });
