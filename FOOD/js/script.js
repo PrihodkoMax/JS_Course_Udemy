@@ -42,7 +42,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	// Timer 
 
-	const deadLine = '2021-06-21';
+	const deadLine = '2021-06-25';
 
 	function getTimeRemaining(endtime) {
 		const t = Date.parse(endtime) - Date.parse(new Date()),
@@ -94,19 +94,23 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	setClock('.timer', deadLine);
 
-	// Modal
+	// Modal Window
 
 	const modal = document.querySelector('.modal'),
 		modalCloseBtn = document.querySelector('[data-close'),
 		modalTriggers = document.querySelectorAll('[data-modal');
 
+
+	function openModalWindow() {
+		modal.classList.add('show');
+		modal.classList.remove('hide');
+		// modal.classList.toggle('show');
+		document.body.style.overflow = 'hidden';
+		clearTimeout(modalTimerId);
+	}
+
 	modalTriggers.forEach(btn => {
-		btn.addEventListener('click', (e) => {
-			modal.classList.add('show');
-			modal.classList.remove('hide');
-			// modal.classList.toggle('show');
-			document.body.style.overflow = 'hidden';
-		})
+		btn.addEventListener('click', openModalWindow);
 	});
 
 	function closeModalWindow() {
@@ -129,4 +133,16 @@ window.addEventListener('DOMContentLoaded', () => {
 			closeModalWindow();
 		}
 	})
+
+	const modalTimerId = setTimeout(openModalWindow, 20000);
+
+	function openModalWindowByScroll() {
+		if (window.pageYOffset + document.documentElement.clientHeight >=
+			document.documentElement.scrollHeight - 1) {
+			openModalWindow();
+			window.removeEventListener('scroll', openModalWindowByScroll);
+		};
+	}
+	window.addEventListener('scroll', openModalWindowByScroll);
+
 });
