@@ -134,7 +134,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		}
 	})
 
-	// const modalTimerId = setTimeout(openModalWindow, 20000);
+	const modalTimerId = setTimeout(openModalWindow, 20000);
 
 	function openModalWindowByScroll() {
 		if (window.pageYOffset + document.documentElement.clientHeight >=
