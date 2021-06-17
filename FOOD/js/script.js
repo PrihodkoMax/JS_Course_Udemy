@@ -126,13 +126,13 @@ window.addEventListener('DOMContentLoaded', () => {
 		if (e.target === modal) {
 			closeModalWindow();
 		}
-	})
+	});
 
 	document.addEventListener('keydown', (e) => {
 		if (e.code === 'Escape' && modal.classList.contains('show')) {
 			closeModalWindow();
 		}
-	})
+	});
 
 	const modalTimerId = setTimeout(openModalWindow, 20000);
 
@@ -141,7 +141,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			document.documentElement.scrollHeight - 1) {
 			openModalWindow();
 			window.removeEventListener('scroll', openModalWindowByScroll);
-		};
+		}
 	}
 	window.addEventListener('scroll', openModalWindowByScroll);
 
@@ -161,7 +161,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		}
 
 		changeToUAN() {
-			return this.price = this.price * this.transfer;
+			return this.price = this.transfer * this.price;
 		}
 
 		render() {
