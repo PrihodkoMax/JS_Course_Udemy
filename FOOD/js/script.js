@@ -48,6 +48,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	const deadLine = '2021-10-30';
 
+	// получаем текущую дату и время
 	function getRemainingDate(overDate) {
 		const t = Date.parse(overDate) - Date.parse(new Date()),
 			d = Math.floor(t / (1000 * 60 * 60 * 24)),
@@ -64,6 +65,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		};
 	}
 
+	// устанавливаем ноль перед однозначным числом
 	function setZero(num) {
 		if (num >= 0 && num < 10) {
 			return `0${num}`;
@@ -72,6 +74,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		}
 	}
 
+	// постим счетчик на стринице
 	function setCounter(selector, endTime) {
 		let timer = document.querySelector(selector),
 			days = timer.querySelector('#days'),
@@ -82,6 +85,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 		updateClock();
 
+		// обновляем дату и время и пушим в таймер
 		function updateClock() {
 			const t = getRemainingDate(endTime);
 			days.innerHTML = setZero(t.days);
@@ -94,8 +98,40 @@ window.addEventListener('DOMContentLoaded', () => {
 			}
 		}
 	}
-
 	setCounter('.timer', deadLine);
+
+	// Modal
+
+	const modal = document.querySelector('.modal'),
+		modalTrigger = document.querySelectorAll('[data-modal]'),
+		modalClose = document.querySelector('.modal__close');
+
+
+	modalTrigger.forEach(btn => {
+		btn.addEventListener('click', () => {
+			modal.classList.toggle('show');
+			document.body.style.overflow = 'hidden';
+		});
+	});
+
+	const closeModalWindow = () => {
+		modal.classList.toggle('show');
+		document.body.style.overflow = '';
+	};
+
+	modalClose.addEventListener('click', closeModalWindow);
+
+	modal.addEventListener('click', (e) => {
+		if (e.target == modal) {
+			closeModalWindow();
+		}
+	});
+
+	document.addEventListener('keydown', (e) => {
+		if (e.code === 'Escape' && modal.classList.contains('show')) {
+			closeModalWindow();
+		}
+	});
 
 });
 
