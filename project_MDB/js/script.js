@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			if (favorite) {
 				console.log("Добавляем любимый фильм");
-			};
+			}
 
 			movieDB.movies.push(newFilm);
 			sortArr(movieDB.movies);
@@ -68,18 +68,18 @@ document.addEventListener('DOMContentLoaded', () => {
 	const makeChanges = () => {
 		genre.textContent = 'драма';
 		poster.style.backgroundImage = 'url("img/bg.jpg")';
-	}
+	};
 
 
 	const sortArr = (arr) => {    // сортируем массив
 		arr.sort();
-	}
+	};
 
 	const deleteAdv = (arr) => {    // удаляем рекламу
 		arr.forEach(item => {
 			item.remove();
 		});
-	}
+	};
 
 
 	// формируем динамически список просмотренных фильмов:
@@ -104,9 +104,9 @@ document.addEventListener('DOMContentLoaded', () => {
 				movieDB.movies.splice(i, 1);   // удалям из базы
 
 				creatMovieList(films, parent);
-			})
+			});
 		});
-	};
+	}
 
 	deleteAdv(adv);
 	makeChanges();
